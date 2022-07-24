@@ -5,6 +5,8 @@ import { MEDIA_LIST_ENTRY_STATUS } from "../../utils/constants";
 import { useState } from "react";
 import { useEffect } from "react";
 import * as Styles from "./styles";
+import { useTrackedState } from "../../context/AppContext";
+import { scoreType } from "../../utils/scoreType";
 
 const AnimeModal = ({
   data,
@@ -17,6 +19,8 @@ const AnimeModal = ({
     const body = document.querySelector("body");
     body.style.overflow = modalIsOpen ? "hidden" : "auto";
   }, [modalIsOpen]);
+
+  const state = useTrackedState();
 
   const modalStyle = {
     overlay: {
@@ -61,10 +65,12 @@ const AnimeModal = ({
         [e.target.name]: e.target.value,
       });
     } else if (e.target.name === "score") {
-      if (e.target.value > 10) {
+      if (
+        e.target.value > scoreType(state.user?.mediaListOptions.scoreFormat)
+      ) {
         setOptions({
           ...options,
-          [e.target.name]: 10,
+          [e.target.name]: scoreType(state.user?.mediaListOptions.scoreFormat),
         });
       } else {
         setOptions({
@@ -186,7 +192,7 @@ const AnimeModal = ({
                 min: 0,
                 max: data?.media.episodes
                   ? data?.media.episodes
-                  : data?.media.nextAiringEpisode.episode - 1,
+                  : data?.media.nextAiringEpisode?.episode - 1,
               }}
               sx={{ color: "white", width: "100px" }}
             />

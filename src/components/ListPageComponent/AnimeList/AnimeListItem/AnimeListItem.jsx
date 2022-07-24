@@ -100,9 +100,7 @@ const AnimeListItem = ({ data, loadingStatus, toggleStatus, deleteEntry }) => {
                 <span>
                   {" "}
                   {data?.progress} /{" "}
-                  {data?.media.episodes
-                    ? data?.media.episodes
-                    : data?.media.nextAiringEpisode.episode - 1}
+                  {data?.media.episodes ? data?.media.episodes : ""}
                 </span>
               </Styles.AnimeListItemProgress>
             </Styles.AnimeListAdaptive>

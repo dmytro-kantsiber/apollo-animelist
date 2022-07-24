@@ -186,7 +186,7 @@ const AnimeModalQuickSearch = ({
                 min: 0,
                 max: data?.episodes
                   ? data?.episodes
-                  : data?.nextAiringEpisode.episode - 1,
+                  : data?.nextAiringEpisode?.episode - 1,
               }}
               sx={{ color: "white", width: "100px" }}
             />

@@ -17,6 +17,7 @@ import { Typography } from "@mui/material";
 import ReactHtmlParser from "react-html-parser";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { gql } from "@apollo/client/core";
 
 const AnimePageItemMain = ({ data, loading }) => {
   const state = useTrackedState();
@@ -81,10 +82,21 @@ const AnimePageItemMain = ({ data, loading }) => {
         variables: { id: data.Media.mediaListEntry.id },
         update(cache, { data: { DeleteMediaListEntry } }) {
           if (DeleteMediaListEntry.deleted) {
+            cache.writeFragment({
+              id: `Media:${id}`,
+              fragment: gql`
+                fragment MyMedia2 on Media {
+                  mediaListEntry
+                }
+              `,
+              data: {
+                mediaListEntry: null,
+              },
+            });
             cache.evict({
               id: cache.identify({
                 __typename: "MediaList",
-                id: id,
+                id: data.Media.mediaListEntry.id,
               }),
             });
             cache.gc();

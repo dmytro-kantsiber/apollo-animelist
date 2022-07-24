@@ -192,7 +192,7 @@ const AnimeModal = ({
                 min: 0,
                 max: data?.Media.episodes
                   ? data?.Media.episodes
-                  : data?.Media.nextAiringEpisode.episode - 1,
+                  : data?.Media?.nextAiringEpisode?.episode - 1 ?? 0,
               }}
               sx={{ color: "white", width: "100px" }}
             />

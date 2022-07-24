@@ -75,6 +75,17 @@ const SearchResultsListItem = ({ isSingleGenre, formatedStatus, anime }) => {
       variables: { id: anime?.mediaListEntry.id },
       update(cache, { data: { DeleteMediaListEntry } }) {
         if (DeleteMediaListEntry.deleted) {
+          cache.writeFragment({
+            id: `Media:${anime?.mediaListEntry.mediaId}`,
+            fragment: gql`
+              fragment MyMedia2 on Media {
+                mediaListEntry
+              }
+            `,
+            data: {
+              mediaListEntry: null,
+            },
+          });
           cache.evict({
             id: cache.identify({
               __typename: "MediaList",
