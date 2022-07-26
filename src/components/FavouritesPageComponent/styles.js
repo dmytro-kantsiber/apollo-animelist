@@ -20,3 +20,10 @@ export const FavouriteItemsWrapper = styled.div`
     grid-template-columns: repeat(1, 1fr);
   }
 `;
+
+export const FavouritePageTitle = styled.div`
+  color: white;
+  font-size: 40px;
+  padding-bottom: 30px;
+  text-align: center;
+`;

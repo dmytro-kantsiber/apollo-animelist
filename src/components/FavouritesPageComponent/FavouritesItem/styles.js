@@ -30,8 +30,13 @@ export const FavouritesItemTitle = styled.div`
   padding-bottom: 20px;
 `;
 
-export const FavouritesItemImage = styled.div``;
-
+export const FavouritesItemImage = styled.div`
+  > img {
+    max-width: 230px;
+    max-height: 320px;
+    object-fit: cover;
+  }
+`;
 export const FavouritesItemButton = styled.div`
   position: absolute;
   top: -15px;

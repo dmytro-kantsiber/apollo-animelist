@@ -59,28 +59,33 @@ const FavouritesPageComponent = () => {
   };
 
   return (
-    <Styles.FavouriteItemsWrapper>
-      {data?.User.favourites.anime.nodes.map((anime) => {
-        return (
-          <FavouritesItem
-            key={anime.id}
-            handleDelete={handleDelete}
-            data={anime}
-          />
-        );
-      })}
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-    </Styles.FavouriteItemsWrapper>
+    <>
+      <Styles.FavouritePageTitle>
+        {state.user?.username}`s favourites
+      </Styles.FavouritePageTitle>
+      <Styles.FavouriteItemsWrapper>
+        {data?.User.favourites.anime.nodes.map((anime) => {
+          return (
+            <FavouritesItem
+              key={anime.id}
+              handleDelete={handleDelete}
+              data={anime}
+            />
+          );
+        })}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </Styles.FavouriteItemsWrapper>
+    </>
   );
 };
 
