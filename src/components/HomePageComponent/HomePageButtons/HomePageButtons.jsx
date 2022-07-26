@@ -1,5 +1,6 @@
 import React from "react";
 import * as Styles from "./styles";
+
 const HomePageButtons = ({ handleReset, handleSubmit }) => {
   return (
     <Styles.Buttons>

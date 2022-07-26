@@ -1,40 +1,30 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import AnimeModalQuickSearch from "../../../../AnimeModal/AnimeModalQuickSearch";
-import * as Styles from "../styles";
+import { gql, useMutation } from "@apollo/client";
+import { Button } from "@mui/material";
+import React, { memo, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DELETE_ENTRY, TOGGLE_STATUS } from "../../../../../graphql/mutations";
-import { gql, useMutation } from "@apollo/client";
-import { setSearchObject } from "../../../../../utils/setSearchObject";
-import { Button } from "@mui/material";
-import { LOAD_ANIME_LIST } from "../../../../../graphql/queries";
+import { setIsModalAC } from "../../../../../context/actions";
 import {
   useDispatch,
   useTrackedState,
 } from "../../../../../context/AppContext";
-import { memo } from "react";
-import { setIsModalAC } from "../../../../../context/actions";
+import { DELETE_ENTRY, TOGGLE_STATUS } from "../../../../../graphql/mutations";
+import { LOAD_ANIME_LIST } from "../../../../../graphql/queries";
+import { setSearchObject } from "../../../../../utils/setSearchObject";
+import AnimeModalQuickSearch from "../../../../AnimeModal/AnimeModalQuickSearch";
+import * as Styles from "../styles";
+
 const SearchResultsListItem = ({ isSingleGenre, formatedStatus, anime }) => {
   const dispatch = useDispatch();
+
+  const { pathname } = useLocation();
 
   const state = useTrackedState();
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  const [toggleStatus, { loading: loadingStatus }] = useMutation(
-    TOGGLE_STATUS,
-    {
-      refetchQueries: [
-        {
-          query: LOAD_ANIME_LIST,
-          variables: {
-            userId: state.user?.id,
-          },
-        },
-      ],
-    }
-  );
+  const [toggleStatus, { loading: loadingStatus }] = useMutation(TOGGLE_STATUS);
 
   const [deleteEntry] = useMutation(DELETE_ENTRY, {});
 
@@ -46,16 +36,27 @@ const SearchResultsListItem = ({ isSingleGenre, formatedStatus, anime }) => {
     if (!loadingStatus) {
       toggleStatus({
         variables: { ...setSearchObject(options), mediaId: anime.id },
+        refetchQueries:
+          pathname === "/myanimelist/"
+            ? [
+                {
+                  query: LOAD_ANIME_LIST,
+                  variables: {
+                    userId: state.user?.id,
+                  },
+                },
+              ]
+            : [],
         update(cache, { data: { SaveMediaListEntry } }) {
           cache.writeFragment({
-            id: `Media:${anime.id}`,
+            id: `Media:${SaveMediaListEntry.mediaId}`,
             fragment: gql`
-              fragment MyMedia2 on Media {
+              fragment mediaListEntry on Media {
                 mediaListEntry
               }
             `,
             data: {
-              mediaListEntry: SaveMediaListEntry,
+              mediaListEntry: { __ref: `MediaList:${SaveMediaListEntry.id}` },
             },
           });
         },

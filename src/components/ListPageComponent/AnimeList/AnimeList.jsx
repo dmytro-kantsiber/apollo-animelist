@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import * as Styles from "./styles";
+import React, { useEffect, useState } from "react";
 import AnimeListItem from "./AnimeListItem/AnimeListItem";
-import { useState } from "react";
 import AnimeListSort from "./AnimeListSort/AnimeListSort";
+import * as Styles from "./styles";
 
 const AnimeList = ({
   data,

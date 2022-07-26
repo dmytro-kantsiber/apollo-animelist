@@ -1,9 +1,7 @@
 import { Input, MenuItem, Select } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { MEDIA_LIST_ENTRY_STATUS } from "../../utils/constants";
-import { useState } from "react";
-import { useEffect } from "react";
 import * as Styles from "./styles";
 
 const AnimeModalQuickSearch = ({

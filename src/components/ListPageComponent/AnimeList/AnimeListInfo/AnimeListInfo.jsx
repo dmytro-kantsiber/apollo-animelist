@@ -1,8 +1,7 @@
-import { Button } from "@mui/material";
 import React from "react";
-import { logoutAC } from "../../../../context/actions";
-import { useDispatch, useTrackedState } from "../../../../context/AppContext";
+import { useTrackedState } from "../../../../context/AppContext";
 import * as Styles from "./styles";
+
 const AnimeListInfo = ({ setCurrentList, lists, currentList }) => {
   const state = useTrackedState();
 
@@ -32,7 +31,7 @@ const AnimeListInfo = ({ setCurrentList, lists, currentList }) => {
                 currentList={currentList}
                 list={list}
               >
-                {list}{" "}
+                {list}
               </Styles.AnimeListProfileTabsItem>
             );
           })}

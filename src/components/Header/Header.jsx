@@ -1,13 +1,13 @@
-import React, { memo } from "react";
-import LoginForm from "../LoginForm/LoginForm";
-import BaseContainer from "../BaseContainer/BaseContainer";
 import Typography from "@mui/material/Typography";
-import * as Styles from "./styles";
-import SearchBar from "./SearchBar/SearchBar";
+import React, { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as LogoSVG } from "../../images/logo.svg";
 import { ReactComponent as SearchSVG } from "../../images/search.svg";
 import "../../index.css";
+import BaseContainer from "../BaseContainer/BaseContainer";
+import LoginForm from "../LoginForm/LoginForm";
+import SearchBar from "./SearchBar/SearchBar";
+import * as Styles from "./styles";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -28,7 +28,7 @@ const Header = () => {
             {pathname === "/" ? null : (
               <Styles.Search>
                 <SearchBar />
-                <SearchSVG />{" "}
+                <SearchSVG />
               </Styles.Search>
             )}
           </Styles.HeaderItem>

@@ -1,11 +1,11 @@
 import React from "react";
 import Modal from "react-modal";
-import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
-import * as Styles from "./styles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AnimePageItemMain from "./AnimePageItemMain/AnimePageItemMain";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 import AnimePageItemAdditional from "./AnimePageItemAdditional/AnimePageItemAdditional";
+import AnimePageItemMain from "./AnimePageItemMain/AnimePageItemMain";
+import * as Styles from "./styles";
 
 Modal.setAppElement("#root");
 const AnimePageItem = ({ data, loading }) => {

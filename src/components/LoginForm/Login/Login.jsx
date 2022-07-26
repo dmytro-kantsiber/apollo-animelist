@@ -1,9 +1,10 @@
 import { Button } from "@mui/material";
 import React from "react";
+import { useTrackedState } from "../../../context/AppContext";
 import useComponentVisible from "../../../hooks/useComponentVisible";
 import Dropdown from "./Dropdown/Dropdown";
 import * as Styles from "./styles";
-import { useTrackedState } from "../../../context/AppContext";
+
 const Login = () => {
   const state = useTrackedState();
 

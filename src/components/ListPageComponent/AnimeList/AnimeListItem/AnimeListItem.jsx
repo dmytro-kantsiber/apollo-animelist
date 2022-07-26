@@ -1,14 +1,12 @@
-import React from "react";
-import * as Styles from "./styles";
-import AnimeListModal from "../../../AnimeModal/AnimeListModal";
-import { setSearchObject } from "../../../../utils/setSearchObject";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
 import { gql } from "@apollo/client";
 import { Button } from "@mui/material";
+import React, { memo, useState } from "react";
 import { Link } from "react-router-dom";
-import { memo } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { setSearchObject } from "../../../../utils/setSearchObject";
+import AnimeListModal from "../../../AnimeModal/AnimeListModal";
+import * as Styles from "./styles";
 
 const AnimeListItem = ({ data, loadingStatus, toggleStatus, deleteEntry }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -21,7 +19,6 @@ const AnimeListItem = ({ data, loadingStatus, toggleStatus, deleteEntry }) => {
     if (!loadingStatus) {
       toggleStatus({
         variables: { ...setSearchObject(options), mediaId: data.mediaId },
-
         onCompleted: () => {
           setIsOpen(false);
           notifyChangeEntry();
@@ -96,9 +93,8 @@ const AnimeListItem = ({ data, loadingStatus, toggleStatus, deleteEntry }) => {
               </Styles.AnimeListItemScore>
 
               <Styles.AnimeListItemProgress>
-                Progress:{" "}
+                Progress:
                 <span>
-                  {" "}
                   {data?.progress} /{" "}
                   {data?.media.episodes ? data?.media.episodes : ""}
                 </span>

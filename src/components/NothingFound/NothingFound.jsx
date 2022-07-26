@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import * as Styles from "./styles";
 import image from "../../images/NothingFound.png";
+import * as Styles from "./styles";
 
 const NothingFound = () => {
   return (

@@ -1,10 +1,14 @@
-import React from "react";
-import { ReactComponent as IsFavTrueSVG } from "../../../../images/isFavTrue.svg";
-import { ReactComponent as IsFavFalseSVG } from "../../../../images/isFavFalse.svg";
 import { gql, useMutation } from "@apollo/client";
+import React from "react";
+import { useTrackedState } from "../../../../context/AppContext";
 import { TOGGLE_FAV } from "../../../../graphql/mutations";
+import { LOAD_USER_FAVS } from "../../../../graphql/queries";
+import { ReactComponent as IsFavFalseSVG } from "../../../../images/isFavFalse.svg";
+import { ReactComponent as IsFavTrueSVG } from "../../../../images/isFavTrue.svg";
 
 const FavButton = ({ id, data, notifyToggleFav, notifyError }) => {
+  const state = useTrackedState();
+
   const [toggleFav, { loading: loadingFav }] = useMutation(TOGGLE_FAV, {
     variables: { id },
     onError: () => {
@@ -14,7 +18,23 @@ const FavButton = ({ id, data, notifyToggleFav, notifyError }) => {
       const temp = ToggleFavourite.anime.nodes.filter((i) => {
         return i.id === data?.Media.id;
       });
+
       notifyToggleFav(temp.length >= 1 ? true : false);
+
+      const tempUser = cache.readQuery({
+        query: LOAD_USER_FAVS,
+        variables: { id: state.user?.id },
+      });
+
+      if (tempUser) {
+        cache.writeQuery({
+          query: LOAD_USER_FAVS,
+          data: {
+            User: { ...tempUser.User, favourites: { ...ToggleFavourite } },
+          },
+        });
+      }
+
       cache.writeFragment({
         id: `Media:${data?.Media.id}`,
         fragment: gql`

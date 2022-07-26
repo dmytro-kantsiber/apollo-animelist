@@ -1,12 +1,12 @@
+import { useLazyQuery } from "@apollo/client";
 import { Input } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { LOAD_MAIN_PAGE_SEARCH_ANIMES } from "../../../graphql/queries";
 import { useDebouncedCallback } from "use-debounce";
-import { useLazyQuery } from "@apollo/client";
+import { setIsModalAC } from "../../../context/actions";
+import { useDispatch } from "../../../context/AppContext";
+import { LOAD_MAIN_PAGE_SEARCH_ANIMES } from "../../../graphql/queries";
 import SearchResultsList from "./SearchResultsList/SearchResultsList";
 import * as Styles from "./styles";
-import { useDispatch } from "../../../context/AppContext";
-import { setIsModalAC } from "../../../context/actions";
 
 const SearchBar = () => {
   const [searchResults, setSearchResults] = useState([]);

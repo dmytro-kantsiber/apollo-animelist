@@ -1,6 +1,6 @@
 import React from "react";
-import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 import Layout from "../../components/Layout/Layout";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 import HomePageComponent from "../../components/HomePageComponent/HomePageComponent";
 const HomePage = () => {

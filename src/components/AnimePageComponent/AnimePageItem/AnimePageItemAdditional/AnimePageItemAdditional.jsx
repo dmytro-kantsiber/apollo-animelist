@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import Characters from "../Characters/Characters";
 import Overview from "../Overview/Overview";
 import Recomendations from "../Recomendations/Recomendations";

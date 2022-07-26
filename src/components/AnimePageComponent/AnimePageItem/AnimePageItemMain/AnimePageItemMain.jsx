@@ -1,23 +1,21 @@
 import { useMutation } from "@apollo/client";
-import React from "react";
-import * as Styles from "../styles";
+import { gql } from "@apollo/client/core";
+import { Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import ReactHtmlParser from "react-html-parser";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DELETE_ENTRY, TOGGLE_STATUS } from "../../../../graphql/mutations";
-import { LOAD_ANIME_PAGE } from "../../../../graphql/queries";
 import { useTrackedState } from "../../../../context/AppContext";
-import { setSearchObject } from "../../../../utils/setSearchObject";
-import { ReactComponent as StarSVG } from "../../../../images/star.svg";
+import { DELETE_ENTRY, TOGGLE_STATUS } from "../../../../graphql/mutations";
 import { ReactComponent as HeartSVG } from "../../../../images/heart.svg";
+import { ReactComponent as StarSVG } from "../../../../images/star.svg";
+import { scoreType } from "../../../../utils/scoreType";
+import { setSearchObject } from "../../../../utils/setSearchObject";
 import AnimeModal from "../../../AnimeModal/AnimeModal";
 import FavButton from "../FavButton/FavButton";
-import { useState } from "react";
 import OptionsButton from "../OptionsButton/OptionsButton";
-import { Typography } from "@mui/material";
-import ReactHtmlParser from "react-html-parser";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { gql } from "@apollo/client/core";
+import * as Styles from "../styles";
 
 const AnimePageItemMain = ({ data, loading }) => {
   const state = useTrackedState();
@@ -48,16 +46,15 @@ const AnimePageItemMain = ({ data, loading }) => {
       toggleStatus({
         variables: { ...setSearchObject(options), mediaId: id },
         update(cache, { data: { SaveMediaListEntry } }) {
-          cache.writeQuery({
-            query: LOAD_ANIME_PAGE,
-            variables: { id },
+          cache.writeFragment({
+            id: `Media:${SaveMediaListEntry.mediaId}`,
+            fragment: gql`
+              fragment mediaListEntry on Media {
+                mediaListEntry
+              }
+            `,
             data: {
-              Media: {
-                ...data.Media,
-                mediaListEntry: {
-                  ...SaveMediaListEntry,
-                },
-              },
+              mediaListEntry: { __ref: `MediaList:${SaveMediaListEntry.id}` },
             },
           });
         },
@@ -151,7 +148,8 @@ const AnimePageItemMain = ({ data, loading }) => {
             <Styles.AnimePageItemMainLeftOptionsScore>
               {data.Media.mediaListEntry?.score > 0 ? (
                 <Typography sx={{ fontWeight: "700", color: "white" }}>
-                  Your score: {data.Media.mediaListEntry.score}
+                  Your score: {data.Media.mediaListEntry.score} /{" "}
+                  {scoreType(state.user?.mediaListOptions.scoreFormat)}
                 </Typography>
               ) : (
                 <Typography sx={{ fontWeight: "700", color: "white" }}>

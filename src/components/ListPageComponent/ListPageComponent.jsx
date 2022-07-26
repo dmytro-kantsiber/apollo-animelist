@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTrackedState } from "../../context/AppContext";
-import { LOAD_ANIME_LIST } from "../../graphql/queries";
 import { DELETE_ENTRY, TOGGLE_STATUS } from "../../graphql/mutations";
-import * as Styles from "./styles";
-import AnimeListInfo from "./AnimeList/AnimeListInfo/AnimeListInfo";
+import { LOAD_ANIME_LIST } from "../../graphql/queries";
 import AnimeList from "./AnimeList/AnimeList";
+import AnimeListInfo from "./AnimeList/AnimeListInfo/AnimeListInfo";
+import * as Styles from "./styles";
 
 const ListPageComponent = () => {
   const notifyDeleteEntry = () => toast("Entry successfully deleted!");

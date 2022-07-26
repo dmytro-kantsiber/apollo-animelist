@@ -1,12 +1,10 @@
-import React from "react";
-import { useEffect } from "react";
 import Typography from "@mui/material/Typography";
-import { Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Redirect } from "react-router-dom";
 import * as Styles from "./styles";
-
-import { useDispatch, useTrackedState } from "../../context/AppContext";
 import { loginAC } from "../../context/actions";
+import { useDispatch, useTrackedState } from "../../context/AppContext";
+
 const RedirectPage = () => {
   const code = window.location;
   const dispatch = useDispatch();

@@ -1,12 +1,11 @@
-import React from "react";
-import * as Styles from "./styles";
-import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { LOAD_SEARCH_PAGE } from "../../graphql/queries";
-import HomePageList from "./HomePageList/HomePageList";
+import React, { useState } from "react";
 import { InView } from "react-intersection-observer";
+import { LOAD_SEARCH_PAGE } from "../../graphql/queries";
 import { PER_PAGE } from "../../utils/constants";
+import HomePageList from "./HomePageList/HomePageList";
 import HomePageWrapper from "./HomePageWrapper/HomePageWrapper";
+import * as Styles from "./styles";
 
 const HomePageComponent = () => {
   const [currentPage, setCurrentPage] = useState(0);

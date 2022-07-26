@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import * as Styles from "./styles";
-import { useHistory } from "react-router-dom";
-import { setSearchObject } from "../../../utils/setSearchObject";
 import queryString from "query-string";
-import HomePageOptions from "../HomePageOptions/HomePageOptions";
-import HomePageSearch from "../HomePageSearch/HomePageSearch";
-import HomePageButtons from "../HomePageButtons/HomePageButtons";
-import HomePageSlider from "../HomePageSlider/HomePageSlider";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { PER_PAGE } from "../../../utils/constants";
 import { filterOptions } from "../../../utils/filterOptions";
+import { setSearchObject } from "../../../utils/setSearchObject";
+import HomePageButtons from "../HomePageButtons/HomePageButtons";
+import HomePageOptions from "../HomePageOptions/HomePageOptions";
+import HomePageSearch from "../HomePageSearch/HomePageSearch";
+import HomePageSlider from "../HomePageSlider/HomePageSlider";
+import * as Styles from "./styles";
+
 const HomePageWrapper = ({
   data,
   loading,

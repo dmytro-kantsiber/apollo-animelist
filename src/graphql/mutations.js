@@ -1,19 +1,18 @@
 import { gql } from "@apollo/client";
 
-export const ADD_ITEM_TO_LIST = gql`
-  mutation ($mediaId: Int) {
-    SaveMediaListEntry(mediaId: $mediaId) {
-      mediaId
-    }
-  }
-`;
-
 export const TOGGLE_FAV = gql`
-  mutation ($id: Int) {
+  mutation ToggleUserFavourite($id: Int) {
     ToggleFavourite(animeId: $id) {
       anime {
         nodes {
           id
+          title {
+            romaji
+          }
+          coverImage {
+            medium
+            large
+          }
         }
       }
     }
@@ -21,7 +20,7 @@ export const TOGGLE_FAV = gql`
 `;
 
 export const TOGGLE_STATUS = gql`
-  mutation (
+  mutation ToggleStatus(
     $id: Int
     $mediaId: Int
     $status: MediaListStatus
@@ -45,7 +44,7 @@ export const TOGGLE_STATUS = gql`
 `;
 
 export const DELETE_ENTRY = gql`
-  mutation ($id: Int) {
+  mutation DeleteEntry($id: Int) {
     DeleteMediaListEntry(id: $id) {
       deleted
     }

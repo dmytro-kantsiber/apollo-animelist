@@ -1,10 +1,10 @@
 import React from "react";
-import * as Styles from "./styles";
 import { Link } from "react-router-dom";
-import NothingFound from "../../../NothingFound/NothingFound";
-import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
-import SearchResultsListItem from "./SearchResultsListItem/SearchResultsListItem";
 import { useTrackedState } from "../../../../context/AppContext";
+import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
+import NothingFound from "../../../NothingFound/NothingFound";
+import SearchResultsListItem from "./SearchResultsListItem/SearchResultsListItem";
+import * as Styles from "./styles";
 
 const SearchResults = ({ data, loading, error, search }) => {
   const state = useTrackedState();

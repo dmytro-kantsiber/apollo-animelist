@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 import NothingFound from "../../NothingFound/NothingFound";
@@ -55,9 +54,9 @@ const HomePageList = ({ results, error, loading }) => {
                 </p>
 
                 <Styles.HomePageListRateWrapper>
-                  Average score:{" "}
+                  Average score:
                   <Styles.HomePageListRate averageScore={anime.averageScore}>
-                    {anime.averageScore}{" "}
+                    {anime.averageScore}
                   </Styles.HomePageListRate>
                 </Styles.HomePageListRateWrapper>
               </Link>

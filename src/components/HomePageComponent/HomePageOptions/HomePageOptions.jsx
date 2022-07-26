@@ -1,8 +1,7 @@
-import React from "react";
-import { SEARCH_OPTIONS } from "../../../utils/constants";
 import { MenuItem, Select } from "@mui/material";
+import React, { memo } from "react";
+import { SEARCH_OPTIONS } from "../../../utils/constants";
 import * as Styles from "./styles";
-import { memo } from "react";
 
 const HomePageOptions = ({ handleChange, options }) => {
   return (

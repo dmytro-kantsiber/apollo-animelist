@@ -1,7 +1,7 @@
 import React from "react";
-import * as Styles from "./styles";
-import Layout from "../../components/Layout/Layout";
 import AnimePageComponent from "../../components/AnimePageComponent/AnimePageComponent";
+import Layout from "../../components/Layout/Layout";
+import * as Styles from "./styles";
 
 const AnimePage = () => {
   return (

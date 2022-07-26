@@ -1,6 +1,5 @@
 import { Input } from "@mui/material";
-import React from "react";
-import { memo } from "react";
+import React, { memo } from "react";
 
 const HomePageSearch = ({ options, handleChange }) => {
   return (

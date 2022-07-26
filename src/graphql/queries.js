@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const LOAD_USER = gql`
-  query {
+  query LoadUser {
     Viewer {
       id
       name
@@ -16,7 +16,7 @@ export const LOAD_USER = gql`
 `;
 
 export const LOAD_MAIN_PAGE_SEARCH_ANIMES = gql`
-  query ($perPage: Int, $search: String) {
+  query LoadMainPageSearchAnimes($perPage: Int, $search: String) {
     Page(perPage: $perPage) {
       media(search: $search, type: ANIME, sort: TRENDING_DESC) {
         id
@@ -26,6 +26,7 @@ export const LOAD_MAIN_PAGE_SEARCH_ANIMES = gql`
         season
         genres
         seasonYear
+        episodes
         nextAiringEpisode {
           id
           episode
@@ -47,94 +48,15 @@ export const LOAD_MAIN_PAGE_SEARCH_ANIMES = gql`
           score
           progress
         }
-        rankings {
-          id
-          rank
-          type
-          year
-          allTime
-          context
-        }
-        trailer {
-          id
-          thumbnail
-          site
-        }
-        episodes
-        staff(sort: RELEVANCE) {
-          edges {
-            node {
-              id
-              name {
-                full
-              }
-              image {
-                medium
-              }
-              primaryOccupations
-            }
-          }
-        }
-        recommendations {
-          edges {
-            node {
-              id
-              mediaRecommendation {
-                id
-                title {
-                  romaji
-                }
-                coverImage {
-                  medium
-                  large
-                }
-              }
-            }
-          }
-        }
+
         isFavourite
         title {
           romaji
         }
-        description(asHtml: true)
+
         coverImage {
           medium
           large
-        }
-        characters(sort: [RELEVANCE, ROLE]) {
-          edges {
-            id
-            node {
-              id
-              image {
-                medium
-              }
-              name {
-                first
-                middle
-                last
-                full
-                native
-              }
-            }
-            role
-          }
-        }
-        relations {
-          edges {
-            id
-            node {
-              id
-              coverImage {
-                medium
-                large
-              }
-              title {
-                romaji
-              }
-            }
-            relationType
-          }
         }
       }
     }
@@ -142,7 +64,7 @@ export const LOAD_MAIN_PAGE_SEARCH_ANIMES = gql`
 `;
 
 export const LOAD_ANIME_PAGE = gql`
-  query ($id: Int) {
+  query LoadAnimePage($id: Int) {
     Media(id: $id) {
       id
       status
@@ -265,7 +187,7 @@ export const LOAD_ANIME_PAGE = gql`
 `;
 
 export const LOAD_SEARCH_PAGE = gql`
-  query (
+  query LoadSearchPage(
     $page: Int
     $perPage: Int
     $search: String
@@ -313,7 +235,7 @@ export const LOAD_SEARCH_PAGE = gql`
 `;
 
 export const LOAD_ANIME_LIST = gql`
-  query ($userId: Int) {
+  query LoadAnimelist($userId: Int) {
     MediaListCollection(type: ANIME, userId: $userId) {
       lists {
         status
@@ -338,6 +260,28 @@ export const LOAD_ANIME_LIST = gql`
               large
             }
             format
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const LOAD_USER_FAVS = gql`
+  query LoadUserFavourites($id: Int) {
+    User(id: $id) {
+      id
+      favourites {
+        anime {
+          nodes {
+            id
+            coverImage {
+              medium
+              large
+            }
+            title {
+              romaji
+            }
           }
         }
       }

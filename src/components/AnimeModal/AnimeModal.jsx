@@ -1,12 +1,10 @@
 import { Input, MenuItem, Select } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { MEDIA_LIST_ENTRY_STATUS } from "../../utils/constants";
-import { useState } from "react";
-import { useEffect } from "react";
-import * as Styles from "./styles";
-import { scoreType } from "../../utils/scoreType";
 import { useTrackedState } from "../../context/AppContext";
+import { MEDIA_LIST_ENTRY_STATUS } from "../../utils/constants";
+import { scoreType } from "../../utils/scoreType";
+import * as Styles from "./styles";
 
 const AnimeModal = ({
   data,

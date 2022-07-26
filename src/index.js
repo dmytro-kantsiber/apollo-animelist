@@ -1,15 +1,16 @@
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { BASE_URL } from "./utils/constants";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
 import "./index.css";
+import { BASE_URL } from "./utils/constants";
+
 const httpLink = createHttpLink({
   uri: BASE_URL,
 });
@@ -31,6 +32,9 @@ export const client = new ApolloClient({
   cache: new InMemoryCache({
     typePolicies: {
       Page: {
+        merge: true,
+      },
+      MediaList: {
         merge: true,
       },
     },

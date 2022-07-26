@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import * as Styles from "./styles";
 import { Link } from "react-router-dom";
 import Image from "../../images/Error.png";
+import * as Styles from "./styles";
 
 const ErrorPage = () => {
   return (

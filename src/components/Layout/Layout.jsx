@@ -1,11 +1,12 @@
+import { useLazyQuery } from "@apollo/client";
 import React, { memo, useEffect } from "react";
+import { setUserAC } from "../../context/actions";
+import { useDispatch, useTrackedState } from "../../context/AppContext";
+import { LOAD_USER } from "../../graphql/queries";
 import BaseContainer from "../BaseContainer/BaseContainer";
 import Header from "../Header/Header";
 import * as Styles from "./styles";
-import { useLazyQuery } from "@apollo/client";
-import { LOAD_USER } from "../../graphql/queries";
-import { useDispatch, useTrackedState } from "../../context/AppContext";
-import { setUserAC } from "../../context/actions";
+
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
 
