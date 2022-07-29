@@ -7,9 +7,13 @@ import { useDispatch } from "../../../context/AppContext";
 import { LOAD_MAIN_PAGE_SEARCH_ANIMES } from "../../../graphql/queries";
 import SearchResultsList from "./SearchResultsList/SearchResultsList";
 import * as Styles from "./styles";
+import { useClickOutside } from "../../../hooks/useClickOutside";
+import { useRef } from "react";
 
 const SearchBar = () => {
   const [searchResults, setSearchResults] = useState([]);
+
+  const ref = useRef();
 
   const [search, setSearch] = useState("");
 
@@ -30,6 +34,12 @@ const SearchBar = () => {
     setSearch(e.target.value);
   };
 
+  const handleClickOutside = () => {
+    dispatch(setIsModalAC(false));
+  };
+
+  useClickOutside(ref, handleClickOutside);
+
   useEffect(() => {
     if (search.length === 0) {
       debounced.cancel();
@@ -43,18 +53,20 @@ const SearchBar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, debounced]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(setIsModalAC(false));
+    };
+  }, [dispatch]);
+
   return (
     <Styles.SearchBar>
       <Input
+        ref={ref}
         onFocus={() => {
           if (search.length >= 1) {
             dispatch(setIsModalAC(true));
           }
-        }}
-        onBlur={() => {
-          setTimeout(() => {
-            dispatch(setIsModalAC(false));
-          }, 200);
         }}
         value={search}
         onChange={handleChange}
@@ -63,9 +75,9 @@ const SearchBar = () => {
       />
       <SearchResultsList
         data={searchResults}
+        search={search}
         loading={loading}
         error={error}
-        search={search}
       />
     </Styles.SearchBar>
   );

@@ -30,15 +30,14 @@ const Layout = ({ children }) => {
     if (userData) {
       dispatch(
         setUserAC({
-          id: userData?.Viewer?.id,
-          username: userData?.Viewer?.name,
-          avatar: userData?.Viewer?.avatar.medium,
-          mediaListOptions: userData?.Viewer?.mediaListOptions,
+          id: userData.Viewer.id,
+          username: userData.Viewer.name,
+          avatar: userData.Viewer.avatar.medium,
+          mediaListOptions: userData.Viewer.mediaListOptions,
         })
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData]);
+  }, [userData, dispatch]);
 
   return (
     <>

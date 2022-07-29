@@ -9,10 +9,10 @@ const FavouritesItem = ({ data, handleDelete }) => {
       <Styles.FavouritesItem>
         <Link to={`/anime/${data.id}`} style={{ textDecoration: "none" }}>
           <Styles.FavouritesItemTitle>
-            {data?.title.romaji}
+            {data.title.romaji}
           </Styles.FavouritesItemTitle>
           <Styles.FavouritesItemImage>
-            <img src={data?.coverImage.large} alt="cover"></img>
+            <img src={data.coverImage.large} alt="cover"></img>
           </Styles.FavouritesItemImage>
         </Link>
         <Styles.FavouritesItemButton onClick={() => handleDelete(data.id)}>

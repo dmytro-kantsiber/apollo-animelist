@@ -79,29 +79,29 @@ const AnimeListItem = ({ data, loadingStatus, toggleStatus, deleteEntry }) => {
       <Styles.AnimeListItem>
         <>
           <Styles.AnimeListItemImage>
-            <img src={data?.media.coverImage.medium} alt="" />
+            <img src={data.media.coverImage.medium} alt="" />
           </Styles.AnimeListItemImage>
           <Styles.AnimeListItemWrapper>
             <Styles.AnimeListItemTitle>
               <Link to={`/anime/${data?.media.id}`}>
-                {data?.media.title.romaji}
+                {data.media.title.romaji}
               </Link>
             </Styles.AnimeListItemTitle>
             <Styles.AnimeListAdaptive>
               <Styles.AnimeListItemScore>
-                Score: <span> {data?.score}</span>
+                Score: <span> {data.score}</span>
               </Styles.AnimeListItemScore>
 
               <Styles.AnimeListItemProgress>
-                Progress:
+                Progress:{" "}
                 <span>
-                  {data?.progress} /{" "}
-                  {data?.media.episodes ? data?.media.episodes : ""}
+                  {data.progress} /{" "}
+                  {data.media.episodes ? data.media.episodes : ""}
                 </span>
               </Styles.AnimeListItemProgress>
             </Styles.AnimeListAdaptive>
             <Styles.AnimeListItemType>
-              {data?.media.format}
+              {data.media.format}
             </Styles.AnimeListItemType>
             <Styles.AnimeListItemType>{data?.status}</Styles.AnimeListItemType>
           </Styles.AnimeListItemWrapper>

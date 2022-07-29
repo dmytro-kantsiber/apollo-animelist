@@ -6,7 +6,6 @@ import * as Styles from "./styles";
 const AnimeList = ({
   data,
   currentList,
-  loading,
   loadingStatus,
   deleteEntry,
   toggleStatus,
@@ -58,7 +57,6 @@ const AnimeList = ({
                   <AnimeListItem
                     key={list.media.id}
                     data={list}
-                    loading={loading}
                     loadingStatus={loadingStatus}
                     deleteEntry={deleteEntry}
                     toggleStatus={toggleStatus}

@@ -94,6 +94,7 @@ export const SEARCH_OPTIONS = [
     title: "Sort",
     type: "sort",
     values: [
+      { name: "Any", value: "Any" },
       { name: "Average Score(DESC)", value: "SCORE_DESC" },
       { name: "Average Score(ASC)", value: "SCORE" },
       { name: "Title(DESC)", value: "TITLE_ROMAJI_DESC" },

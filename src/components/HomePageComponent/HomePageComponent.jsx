@@ -30,7 +30,7 @@ const HomePageComponent = () => {
         <InView
           onChange={(inView) => {
             if (inView && !loading) {
-              setCurrentPage(Math.floor(data?.Page?.media.length / PER_PAGE));
+              setCurrentPage(Math.floor(data.Page.media.length / PER_PAGE));
             }
           }}
         ></InView>

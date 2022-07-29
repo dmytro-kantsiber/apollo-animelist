@@ -1,25 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ErrorComponent from "../../ErrorComponent/ErrorComponent";
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 import NothingFound from "../../NothingFound/NothingFound";
+import HomePageListDescription from "./HomePageListDescription/HomePageListDescription";
 import * as Styles from "./styles";
 
 const HomePageList = ({ results, error, loading }) => {
-  if (error) {
-    return <h1>Error</h1>;
-  }
-
   if (loading) {
     return <LoadingSpinner />;
   }
 
-  if (results?.Page?.media.length < 1) {
+  if (error) {
+    return <ErrorComponent />;
+  }
+
+  if (results?.Page.media.length < 1) {
     return <NothingFound />;
   }
 
   return (
     <Styles.HomePageList>
-      {results?.Page?.media.map((anime) => {
+      {results?.Page.media.map((anime) => {
         let isAnimeNull = anime.duration === null || anime.episodes === null;
         let animeFormat =
           anime.format === "MOVIE"
@@ -42,16 +44,7 @@ const HomePageList = ({ results, error, loading }) => {
                   </p>
                 </Styles.HomePageListTitle>
                 <p>{isAnimeNull ? "No info about episodes" : animeFormat}</p>
-                <p>
-                  {anime.description.length > 200
-                    ? anime.description
-                        .replace(/<\/?[^>]+(>|$)/g, "")
-                        .replaceAll("&quot;", "")
-                        .slice(0, 200) + "..."
-                    : anime.description
-                        .replace(/<\/?[^>]+(>|$)/g, "")
-                        .replaceAll("&quot;", "")}
-                </p>
+                <HomePageListDescription description={anime.description} />
 
                 <Styles.HomePageListRateWrapper>
                   Average score:

@@ -51,26 +51,32 @@ export const HomePageListLogo = styled.div`
 `;
 export const HomePageListTitle = styled.div`
   font-size: 20px;
+
   > p {
     text-decoration: none;
 
+    margin: 0;
     text-align: center;
     line-height: 23px;
   }
 `;
 export const HomePageListInfo = styled.div`
-  display: flex;
   line-height: 14px;
+
   padding-left: 15px;
   padding-right: 15px;
   flex-direction: column;
   font-size: 14px;
 
   > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     text-decoration: none;
     font-size: 14px;
     margin: 5px;
     color: white;
+    min-height: 250px;
   }
   > div {
     margin: 5px;
@@ -99,6 +105,4 @@ export const HomePageListRate = styled.p`
 export const HomePageListRateWrapper = styled.div`
   color: white;
   padding-bottom: 15px;
-  @media (max-width: 430px) {
-  }
 `;

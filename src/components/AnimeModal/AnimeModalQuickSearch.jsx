@@ -85,10 +85,10 @@ const AnimeModalQuickSearch = ({
         }
       }
       if (!data.episodes) {
-        if (e.target.value > data?.nextAiringEpisode.episode - 1) {
+        if (e.target.value > data.nextAiringEpisode.episode - 1) {
           setOptions({
             ...options,
-            [e.target.name]: data?.nextAiringEpisode.episode - 1,
+            [e.target.name]: data.nextAiringEpisode.episode - 1,
           });
         } else {
           setOptions({
@@ -110,12 +110,12 @@ const AnimeModalQuickSearch = ({
       <Styles.AnimeModalWrapper>
         <Styles.AnimeModalLeft>
           <Styles.AnimeModalLeftImage>
-            <img src={data?.coverImage.large} alt="cover" />
+            <img src={data.coverImage.large} alt="cover" />
           </Styles.AnimeModalLeftImage>
         </Styles.AnimeModalLeft>
         <Styles.AnimeModalRight>
           <Styles.AnimeModalRightTitle>
-            {data?.title.romaji}
+            {data.title.romaji}
           </Styles.AnimeModalRightTitle>
           <Styles.AnimeModalItem>
             <Styles.AnimeItemTitle>Status</Styles.AnimeItemTitle>
@@ -182,9 +182,9 @@ const AnimeModalQuickSearch = ({
               name="progress"
               inputProps={{
                 min: 0,
-                max: data?.episodes
-                  ? data?.episodes
-                  : data?.nextAiringEpisode?.episode - 1,
+                max: data.episodes
+                  ? data.episodes
+                  : data.nextAiringEpisode?.episode - 1,
               }}
               sx={{ color: "white", width: "100px" }}
             />
@@ -192,15 +192,11 @@ const AnimeModalQuickSearch = ({
         </Styles.AnimeModalRight>
       </Styles.AnimeModalWrapper>
       <Styles.AnimeModalButtons>
-        {data?.mediaListEntry ? (
+        {data.mediaListEntry ? (
           <button onClick={handleRemove}>Remove</button>
         ) : null}
 
-        <button
-          onClick={() => handleSubmit(options, data.mediaListEntry?.status)}
-        >
-          Save
-        </button>
+        <button onClick={() => handleSubmit(options)}>Save</button>
       </Styles.AnimeModalButtons>
     </Modal>
   );

@@ -16,14 +16,14 @@ const FavButton = ({ id, data, notifyToggleFav, notifyError }) => {
     },
     update(cache, { data: { ToggleFavourite } }) {
       const temp = ToggleFavourite.anime.nodes.filter((i) => {
-        return i.id === data?.Media.id;
+        return i.id === data.Media.id;
       });
 
       notifyToggleFav(temp.length >= 1 ? true : false);
 
       const tempUser = cache.readQuery({
         query: LOAD_USER_FAVS,
-        variables: { id: state.user?.id },
+        variables: { id: state.user.id },
       });
 
       if (tempUser) {
@@ -36,7 +36,7 @@ const FavButton = ({ id, data, notifyToggleFav, notifyError }) => {
       }
 
       cache.writeFragment({
-        id: `Media:${data?.Media.id}`,
+        id: `Media:${data.Media.id}`,
         fragment: gql`
           fragment Fav on Media {
             isFavourite
@@ -51,7 +51,7 @@ const FavButton = ({ id, data, notifyToggleFav, notifyError }) => {
 
   return (
     <>
-      {data?.Media.isFavourite ? (
+      {data.Media.isFavourite ? (
         <IsFavTrueSVG
           style={{ cursor: "pointer" }}
           onClick={() => {

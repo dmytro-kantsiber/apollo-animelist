@@ -63,12 +63,10 @@ const AnimeModal = ({
         [e.target.name]: e.target.value,
       });
     } else if (e.target.name === "score") {
-      if (
-        e.target.value > scoreType(state.user?.mediaListOptions.scoreFormat)
-      ) {
+      if (e.target.value > scoreType(state.user.mediaListOptions.scoreFormat)) {
         setOptions({
           ...options,
-          [e.target.name]: scoreType(state.user?.mediaListOptions.scoreFormat),
+          [e.target.name]: scoreType(state.user.mediaListOptions.scoreFormat),
         });
       } else {
         setOptions({
@@ -91,10 +89,10 @@ const AnimeModal = ({
         }
       }
       if (!data.Media.episodes) {
-        if (e.target.value > data?.Media.nextAiringEpisode.episode - 1) {
+        if (e.target.value > data.Media.nextAiringEpisode.episode - 1) {
           setOptions({
             ...options,
-            [e.target.name]: data?.Media.nextAiringEpisode.episode - 1,
+            [e.target.name]: data.Media.nextAiringEpisode.episode - 1,
           });
         } else {
           setOptions({
@@ -116,12 +114,12 @@ const AnimeModal = ({
       <Styles.AnimeModalWrapper>
         <Styles.AnimeModalLeft>
           <Styles.AnimeModalLeftImage>
-            <img src={data?.Media.coverImage.large} alt="cover" />
+            <img src={data.Media.coverImage.large} alt="cover" />
           </Styles.AnimeModalLeftImage>
         </Styles.AnimeModalLeft>
         <Styles.AnimeModalRight>
           <Styles.AnimeModalRightTitle>
-            {data?.Media.title.romaji}
+            {data.Media.title.romaji}
           </Styles.AnimeModalRightTitle>
           <Styles.AnimeModalItem>
             <Styles.AnimeItemTitle>Status</Styles.AnimeItemTitle>
@@ -188,9 +186,9 @@ const AnimeModal = ({
               name="progress"
               inputProps={{
                 min: 0,
-                max: data?.Media.episodes
-                  ? data?.Media.episodes
-                  : data?.Media?.nextAiringEpisode?.episode - 1 ?? 0,
+                max: data.Media.episodes
+                  ? data.Media.episodes
+                  : data.Media.nextAiringEpisode?.episode - 1 ?? 0,
               }}
               sx={{ color: "white", width: "100px" }}
             />
@@ -198,17 +196,11 @@ const AnimeModal = ({
         </Styles.AnimeModalRight>
       </Styles.AnimeModalWrapper>
       <Styles.AnimeModalButtons>
-        {data?.Media.mediaListEntry ? (
+        {data.Media.mediaListEntry ? (
           <button onClick={handleRemove}>Remove</button>
         ) : null}
 
-        <button
-          onClick={() =>
-            handleSubmit(options, data.Media.mediaListEntry?.status)
-          }
-        >
-          Save
-        </button>
+        <button onClick={() => handleSubmit(options)}>Save</button>
       </Styles.AnimeModalButtons>
     </Modal>
   );

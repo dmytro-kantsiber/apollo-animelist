@@ -52,7 +52,7 @@ const HomePageOptions = ({ handleChange, options }) => {
                               backgroundColor: "#929292",
                             },
                           }}
-                          value={option.value || ""}
+                          value={option.value || "Any"}
                         >
                           {option.name}
                         </MenuItem>

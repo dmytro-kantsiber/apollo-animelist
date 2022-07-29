@@ -35,7 +35,7 @@ const HomePageWrapper = ({
     averageScore_lesser: 100,
   });
 
-  const [options, setOptions] = useState({});
+  const [options, setOptions] = useState({ ...defaultOptions });
 
   useEffect(() => {
     getSearchPage({
@@ -55,7 +55,8 @@ const HomePageWrapper = ({
       averageScore_greater: temp.averageScore_greater || 0,
       averageScore_lesser: temp.averageScore_lesser || 100,
     });
-  }, [history.location.search, defaultOptions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = useCallback(
     (e) => {

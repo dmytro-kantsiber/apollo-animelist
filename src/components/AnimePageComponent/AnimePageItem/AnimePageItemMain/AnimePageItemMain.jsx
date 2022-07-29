@@ -17,7 +17,7 @@ import FavButton from "../FavButton/FavButton";
 import OptionsButton from "../OptionsButton/OptionsButton";
 import * as Styles from "../styles";
 
-const AnimePageItemMain = ({ data, loading }) => {
+const AnimePageItemMain = ({ data }) => {
   const state = useTrackedState();
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -72,8 +72,8 @@ const AnimePageItemMain = ({ data, loading }) => {
   const handleRemove = () => {
     if (
       !loadingDelete &&
-      data?.Media.mediaListEntry.status &&
-      data?.Media.mediaListEntry.status !== "Not in list"
+      data.Media.mediaListEntry.status &&
+      data.Media.mediaListEntry.status !== "Not in list"
     ) {
       deleteEntry({
         variables: { id: data.Media.mediaListEntry.id },
@@ -122,7 +122,7 @@ const AnimePageItemMain = ({ data, loading }) => {
     <Styles.AnimePageItemMain>
       <Styles.AnimePageItemMainLeft>
         <Styles.AnimePageItemMainLeftImage
-          src={data?.Media.coverImage.large}
+          src={data.Media.coverImage.large}
           alt="animeCover"
         />
         <AnimeModal
@@ -139,7 +139,6 @@ const AnimePageItemMain = ({ data, loading }) => {
               <OptionsButton data={data} openModal={openModal} />
               <FavButton
                 id={id}
-                loading={loading}
                 data={data}
                 notifyToggleFav={notifyToggleFav}
                 notifyError={notifyError}
@@ -148,7 +147,7 @@ const AnimePageItemMain = ({ data, loading }) => {
             <Styles.AnimePageItemMainLeftOptionsScore>
               {data.Media.mediaListEntry?.score > 0 ? (
                 <Typography sx={{ fontWeight: "700", color: "white" }}>
-                  Your score: {data.Media.mediaListEntry.score} /{" "}
+                  Your score: {data.Media.mediaListEntry?.score} /{" "}
                   {scoreType(state.user?.mediaListOptions.scoreFormat)}
                 </Typography>
               ) : (
@@ -161,7 +160,7 @@ const AnimePageItemMain = ({ data, loading }) => {
         ) : null}
 
         <Styles.AnimePageAdditionalLeft>
-          {data?.Media?.rankings?.map((item) => {
+          {data.Media.rankings.map((item) => {
             if (item.allTime) {
               return (
                 <Styles.AnimePageAdditionalLeftRankings key={item.id}>
@@ -179,10 +178,10 @@ const AnimePageItemMain = ({ data, loading }) => {
       </Styles.AnimePageItemMainLeft>
       <Styles.AnimePageItemMainRight>
         <Styles.AnimePageItemMainRightTitle>
-          {data?.Media.title.romaji}
+          {data.Media.title.romaji}
         </Styles.AnimePageItemMainRightTitle>
         <Styles.AnimePageItemMainRightDescription>
-          {ReactHtmlParser(data?.Media.description)}
+          {ReactHtmlParser(data.Media.description)}
         </Styles.AnimePageItemMainRightDescription>
       </Styles.AnimePageItemMainRight>
     </Styles.AnimePageItemMain>
