@@ -38,14 +38,6 @@ const HomePageWrapper = ({
   const [options, setOptions] = useState({ ...defaultOptions });
 
   useEffect(() => {
-    getSearchPage({
-      variables: setSearchObject({
-        ...queryString.parse(history.location.search),
-      }),
-    });
-  }, [history.location.search, getSearchPage]);
-
-  useEffect(() => {
     setOptions({
       ...defaultOptions,
       ...queryString.parse(history.location.search),
@@ -55,17 +47,23 @@ const HomePageWrapper = ({
       averageScore_greater: temp.averageScore_greater || 0,
       averageScore_lesser: temp.averageScore_lesser || 100,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    getSearchPage({
+      variables: setSearchObject({
+        ...queryString.parse(history.location.search),
+      }),
+    });
+  }, [history.location.search, defaultOptions, getSearchPage]);
 
   const handleChange = useCallback(
     (e) => {
-      setOptions({
-        ...options,
-        [e.target.name]: e.target.value,
-      });
+      if (!loading) {
+        setOptions({
+          ...options,
+          [e.target.name]: e.target.value,
+        });
+      }
     },
-    [options]
+    [options, loading]
   );
 
   const handleSliderChange = (e) => {
