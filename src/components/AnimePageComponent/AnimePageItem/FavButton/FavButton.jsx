@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { useWhyDidYouUpdate } from "ahooks";
 import React from "react";
 import { useTrackedState } from "../../../../context/AppContext";
 import { TOGGLE_FAV } from "../../../../graphql/mutations";
@@ -8,6 +9,7 @@ import { ReactComponent as IsFavTrueSVG } from "../../../../images/isFavTrue.svg
 
 const FavButton = ({ id, data, notifyToggleFav, notifyError }) => {
   const state = useTrackedState();
+  useWhyDidYouUpdate("FavButton", { id, data, notifyToggleFav, notifyError });
 
   const [toggleFav, { loading: loadingFav }] = useMutation(TOGGLE_FAV, {
     variables: { id },

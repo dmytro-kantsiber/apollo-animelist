@@ -3,7 +3,7 @@ import { Input } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { setIsModalAC } from "../../../context/actions";
-import { useDispatch } from "../../../context/AppContext";
+import { useDispatch, useTrackedState } from "../../../context/AppContext";
 import { LOAD_MAIN_PAGE_SEARCH_ANIMES } from "../../../graphql/queries";
 import SearchResultsList from "./SearchResultsList/SearchResultsList";
 import * as Styles from "./styles";
@@ -11,6 +11,8 @@ import { useClickOutside } from "../../../hooks/useClickOutside";
 import { useRef } from "react";
 
 const SearchBar = () => {
+  const state = useTrackedState();
+
   const [searchResults, setSearchResults] = useState([]);
 
   const ref = useRef();
@@ -35,7 +37,9 @@ const SearchBar = () => {
   };
 
   const handleClickOutside = () => {
-    dispatch(setIsModalAC(false));
+    if (state.isModal) {
+      dispatch(setIsModalAC(false));
+    }
   };
 
   useClickOutside(ref, handleClickOutside);

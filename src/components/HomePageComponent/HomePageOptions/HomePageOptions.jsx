@@ -1,6 +1,6 @@
-import { MenuItem, Select } from "@mui/material";
-import React, { memo } from "react";
+import React from "react";
 import { SEARCH_OPTIONS } from "../../../utils/constants";
+import HomePageOption from "./HomePageOption";
 import * as Styles from "./styles";
 
 const HomePageOptions = ({ handleChange, options }) => {
@@ -11,55 +11,12 @@ const HomePageOptions = ({ handleChange, options }) => {
           <Styles.HomePageOptionsFilters>
             {SEARCH_OPTIONS.map((element, index) => {
               return (
-                <Styles.HomePageOptionsItem key={index}>
-                  <Styles.HomePageOptionsItemName>
-                    <p>{element.title}</p>
-                  </Styles.HomePageOptionsItemName>
-
-                  <Select
-                    key={index}
-                    sx={{
-                      width: "200px",
-                      height: "50px",
-                      backgroundColor: "gray",
-                      color: "white",
-                    }}
-                    MenuProps={{
-                      MenuListProps: { disablePadding: true },
-                    }}
-                    value={options[element.type] || ""}
-                    name={element.type}
-                    onChange={handleChange}
-                  >
-                    {element.values.map((option, index) => {
-                      return (
-                        <MenuItem
-                          key={index}
-                          sx={{
-                            height: "50px",
-                            backgroundColor: "gray",
-                            disablePadding: true,
-                            color: "white",
-
-                            "&:hover": {
-                              backgroundColor: "#929292",
-                            },
-
-                            "&.Mui-selected": {
-                              backgroundColor: "#929292 !important",
-                            },
-                            "&.Mui-selected:hover": {
-                              backgroundColor: "#929292",
-                            },
-                          }}
-                          value={option.value || "Any"}
-                        >
-                          {option.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </Styles.HomePageOptionsItem>
+                <HomePageOption
+                  key={index}
+                  element={element}
+                  handleChange={handleChange}
+                  options={options[element.type]}
+                />
               );
             })}
           </Styles.HomePageOptionsFilters>
@@ -69,4 +26,4 @@ const HomePageOptions = ({ handleChange, options }) => {
   );
 };
 
-export default memo(HomePageOptions);
+export default HomePageOptions;
